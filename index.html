@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ENEM Wise E-Learning</title>
+  <link href="styles/styles.css" rel="stylesheet">
+  <link rel="manifest" href="manifest.json">
+  <script src="scripts/app.js" defer></script>
+</head>
+<body class="bg-gray-100 text-gray-900">
+  <header class="bg-green-700 p-4 shadow-md fixed top-0 w-full z-50">
+    <div class="container mx-auto text-center">
+      <div class="header-logo" aria-label="Logo e nome do site">
+        <img src="images/icon-192x192.png" alt="Logo ENEM Wise">
+        <h1 class="text-2xl font-bold text-white">ENEM Wise E-Learning</h1>
+      </div>
+      <nav>
+        <ul class="flex space-x-4 justify-center" role="navigation">
+          <li><a href="#" class="nav-link" data-section="dashboard" aria-label="Painel de Controle"><i class="fas fa-chart-line"></i> Painel de Controle</a></li>
+          <li><a href="#" class="nav-link" data-section="lessons" aria-label="Aulas"><i class="fas fa-book-open"></i> Aulas</a></li>
+          <li><a href="#" class="nav-link" data-section="exercises" aria-label="Exercícios"><i class="fas fa-pencil-alt"></i> Exercícios</a></li>
+          <li><a href="#" class="nav-link" data-section="chatbot" aria-label="Chatbot"><i class="fas fa-comments"></i> Chatbot</a></li>
+          <li><a href="#" class="nav-link" data-section="profile" aria-label="Perfil"><i class="fas fa-user"></i> Perfil</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container mx-auto p-6 mt-24">
+   <!-- Seção de Login -->
+    <section id="login" class="section active" aria-label="Login">
+      <div class="bg-white p-8 rounded-lg shadow-lg max-w-md mx-auto">
+        <h2 class="text-2xl font-bold mb-6 text-center">Login no E-Learning Brasil</h2>
+        <form id="loginForm" class="space-y-4" aria-label="Formulário de Login">
+          <div>
+            <label for="email" class="block text-lg font-medium mb-2">Email</label>
+            <input type="email" id="email" class="w-full p-3 border border-gray-300 rounded-lg" required aria-required="true">
+          </div>
+          <div>
+            <label for="password" class="block text-lg font-medium mb-2">Senha</label>
+            <input type="password" id="password" class="w-full p-3 border border-gray-300 rounded-lg" required aria-required="true">
+          </div>
+          <button type="submit" class="bg-green-700 text-white px-6 py-3 rounded-lg w-full hover:bg-green-800">Entrar</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Seção de Painel de Controle -->
+    <section id="dashboard" class="section" aria-label="Painel de Controle">
+      <h2 class="text-2xl font-bold mb-4 text-center">Painel de Controle</h2>
+      <section id="features" class="mb-8">
+        <h2 class="text-2xl font-bold mb-4 text-center">Principais Funcionalidades</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-center">
+          <div class="bg-white p-6 rounded-lg shadow-lg cursor-pointer" data-section="lessons">
+            <i class="fas fa-chalkboard-teacher icon mx-auto mb-4" style="color: #ffd700;"></i>
+            <h3 class="text-xl font-bold mb-2">Aulas Interativas</h3>
+            <p class="text-gray-600">Exemplos práticos e exercícios.</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-lg cursor-pointer" data-section="exercises">
+            <i class="fas fa-tasks icon mx-auto mb-4" style="color: #ffd700;"></i>
+            <h3 class="text-xl font-bold mb-2">Exercícios Dinâmicos</h3>
+            <p class="text-gray-600">Questionários e avaliações para testar seu conhecimento.</p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-lg cursor-pointer" data-section="chatbot">
+            <i class="fas fa-comments icon mx-auto mb-4" style="color: #ffd700;"></i>
+            <h3 class="text-xl font-bold mb-2">Assistência por Chatbot</h3>
+            <p class="text-gray-600">Obtenha ajuda instantânea com nosso chatbot integrado.</p>
+          </div>
+        </div>
+      </section>
+      <div class="bg-white p-8 rounded-lg shadow-lg">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+          <div class="text-center">
+            <h3 class="text-xl font-bold mb-2">Aulas Concluídas</h3>
+            <p id="lessons-completed" class="text-4xl font-bold text-green-700">0</p>
+          </div>
+          <div class="text-center">
+            <h3 class="text-xl font-bold mb-2">Exercícios Realizados</h3>
+            <p id="exercises-taken" class="text-4xl font-bold text-green-700">0</p>
+          </div>
+          <div class="text-center">
+            <h3 class="text-xl font-bold mb-2">Pontuação Total</h3>
+            <p id="total-score" class="text-4xl font-bold text-green-700">0%</          </div>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+          <div>
+            <canvas id="lessonsChart"></canvas>
+          </div>
+          <div>
+            <canvas id="exercisesChart"></canvas>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div>
+            <canvas id="scoreChart"></canvas>
+          </div>
+          <div>
+            <canvas id="progressChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de Aulas -->
+    <section id="lessons" class="section" aria-label="Aulas">
+      <h2 class="text-2xl font-bold mb-4 text-center">Aulas</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="showChat('Matemática', 'lesson')">
+          <i class="fas fa-book-open text-green-700 text-4xl mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Matemática</h3>
+          <p class="text-gray-600 mb-4">Aulas de Matemática</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="showChat('Linguagens', 'lesson')">
+          <i class="fas fa-code text-green-700 text-4xl mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Linguagens</h3>
+          <p class="text-gray-600 mb-4">Aulas de Linguagens</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="showChat('Ciências Humanas', 'lesson')">
+          <i class="fas fa-database text-green-700 text-4xl mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Ciências Humanas</h3>
+          <p class="text-gray-600 mb-4">Aulas de Ciências Humanas</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="showChat('Ciências da Natureza', 'lesson')">
+          <i class="fas fa-users text-green-700 text-4xl mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Ciências da Natureza</h3>
+          <p class="text-gray-600 mb-4">Aulas de Ciências da Natureza</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="showChat('Redação', 'lesson')">
+          <i class="fas fa-mobile-alt text-green-700 text-4xl mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Redação</h3>
+          <p class="text-gray-600 mb-4">Aulas de Redação</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de Exercícios -->
+    <section id="exercises" class="section" aria-label="Exercícios">
+      <h2 class="text-2xl font-bold mb-4 text-center">Exercícios</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="startExercise('Matemática')">
+          <i class="fas fa-book-open text-green-600 text-4xl mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Matemática</h3>
+          <p class="text-gray-600 mb-4">Exercícios de Matemática</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="startExercise('Linguagens')">
+          <i class="fas fa-code text-green-600 text-4xl mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Linguagens</h3>
+          <p class="text-gray-600 mb-4">Exercícios de Linguagens</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="startExercise('Ciências Humanas')">
+          <i class="fas fa-database text-green-600 text-4xl mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Ciências Humanas</h3>
+          <p class="text-gray-600 mb-4">Exercícios de Ciências Humanas</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="startExercise('Ciências da Natureza')">
+          <i class="fas fa-users text-green-600 text-4xl mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Ciências da Natureza</h3>
+          <p class="text-gray-600 mb-4">Exercícios de Ciências da Natureza</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-lg cursor-pointer" onclick="startExercise('Redação')">
+          <i class="fas fa-mobile-alt text-green-600 text-4xl mb-4"></i>
+          <h3 class="text-xl font-bold mb-2">Redação</h3>
+          <p class="text-gray-600 mb-4">Exercícios de Redação</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de Chatbot -->
+    <section id="chatbot" class="section">
+      <h2 class="text-2xl font-bold mb-4 text-center">Assistência por Chatbot</h2>
+      <div class="chat-container bg-white p-6 rounded-lg shadow-lg max-w-4xl mx-auto">
+        <div class="chat-box mb-4" id="chat-box">
+          <div class="message bot-message" id="bot-welcome-message">Olá! Vamos começar.</div>
+        </div>
+        <div class="flex">
+          <input type="text" id="user-input" class="w-full p-3 border border-gray-300 rounded-l-lg" placeholder="Digite uma mensagem..." aria-label="Digite uma mensagem">
+          <button id="send-btn" class="bg-green-700 text-white px-4 py-3 hover:bg-green-800" aria-label="Enviar mensagem"><i class="fas fa-paper-plane"></i></button>
+          <button id="voice-btn" class="bg-green-700 text-white px-4 py-3 hover:bg-green-800" aria-label="Gravar mensagem de voz"><i class="fas fa-microphone"></i></button>
+        </div>
+        <button onclick="goBack()" class="mt-4 bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800" aria-label="Voltar">Voltar</button>
+      </div>
+    </section>
+
+  </div>
+
+  <div id="offline-message" style="display: none;">
+    Você está offline. Algumas funcionalidades podem não estar disponíveis.
+  </div>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js')
+      .then((registration) => {
+        console.log('Service Worker registrado com escopo:', registration.scope);
+      })
+      .catch((error) => {
+        console.error('Falha ao registrar o Service Worker:', error);
+      });
+    }
+
+    window.addEventListener('load', () => {
+      function updateOnlineStatus() {
+        const condition = navigator.onLine ? 'online' : 'offline';
+        document.getElementById('offline-message').style.display = (condition === 'offline') ? 'block' : 'none';
+      }
+
+      window.addEventListener('online', updateOnlineStatus);
+      window.addEventListener('offline', updateOnlineStatus);
+      updateOnlineStatus();
+    });
+  </script>
+</body>
+</html>
