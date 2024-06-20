@@ -1,48 +1,190 @@
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 header {
-  background-color: #009739;
-  color: #fff;
-  padding: 10px 0;
-  text-align: center;
+    background-color: #009739;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
 }
 
 nav {
-  color: #fff;
-  padding: 10px;
+    color: #000;
+    padding: 10px;
 }
 
 nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
 nav ul li {
-  display: inline;
-  margin-right: 10px;
+    display: inline;
+    margin-right: 10px;
 }
 
 nav ul li a {
-  color: #fff;
-  text-decoration: none;
+    color: #000;
+    text-decoration: none;
+    background-color: transparent; /* Ensure transparent background */
+    transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 nav ul li a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
+    color: #000; /* Change text color to black on hover */
 }
-
 .section {
-  display: none;
+    display: none;
 }
 
 .section.active {
-  display: block;
-  padding: 20px;
+    display: block;
+    padding: 20px;
 }
 
-/* Adicione mais estilos conforme necessário */
+.grid {
+    display: grid;
+    gap: 10px;
+}
+
+.grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.bg-white {
+    background-color: #fff;
+}
+
+.p-6 {
+    padding: 1.5rem;
+}
+
+.rounded-lg {
+    border-radius: 0.5rem;
+}
+
+.shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.text-xl {
+    font-size: 1.25rem;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+.mb-2 {
+    margin-bottom: 0.5rem;
+}
+
+.text-gray-600 {
+    color: #4b5563;
+}
+
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
+.chat-container {
+    max-width: 700px;
+    height: 600px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-box {
+    flex: 1;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+}
+
+.notebook-style {
+    background-color: #fff;
+    background-image: linear-gradient(to bottom, #c0c0c0 1px, transparent 1px);
+    background-size: 100% 20px;
+    line-height: 20px;
+}
+
+.quiz-style {
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pdf-style {
+    background-color: #e0e0e0;
+    font-family: 'Times New Roman', Times, serif;
+    padding: 20px;
+}
+
+.message {
+    padding: 10px;
+    margin: 10px 0;
+}
+
+.bot-message {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    max-width: 80%;
+}
+
+.user-message {
+    background-color: #d0e0f0;
+    text-align: right;
+    border-radius: 10px;
+    max-width: 80%;
+    margin-left: auto;
+}
+
+input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #009739;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #006b3f;
+}
+
+#voice-btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+#send-btn {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
