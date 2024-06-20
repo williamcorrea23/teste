@@ -1,0 +1,48 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #009739;
+  color: #fff;
+  padding: 10px 0;
+  text-align: center;
+}
+
+nav {
+  color: #fff;
+  padding: 10px;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 10px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+nav ul li a:hover {
+  text-decoration: underline;
+}
+
+.section {
+  display: none;
+}
+
+.section.active {
+  display: block;
+  padding: 20px;
+}
+
+/* Adicione mais estilos conforme necessário */
