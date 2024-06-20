@@ -276,12 +276,12 @@
         displayMessage('Parabéns! Isso está correto.');
         updateScore(userId, 3);
       } else {
-        displayMessage(`Desculpe, isso está incorreto. A resposta correta é: ${message}`);
+        displayMessage(` ${message}`);
       }
     }
-
+// TRecho
     async function callGPTAssistant(userInput) {
-      const apiKey = 'sk-proj-rsB70Vd2hYtB27F9nlZsT3BlbkFJYRGOuAjMPapAaUaLFqCa'; // Substitua pela sua chave de API OpenAI
+      const apiKey = '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'; // Substitua pela sua chave de API OpenAI
       const endpoint = 'https://api.openai.com/v1/chat/completions';
       const prompt = `${currentPrompt} ${userInput}`;
 
