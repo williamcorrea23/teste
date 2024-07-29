@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste Auth0 Local</title>
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/1.19/auth0-spa-js.production.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+        }
+        #profile {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Teste de Autenticação com Auth0</h1>
+        <div id="auth-buttons">
+            <button id="login" onclick="login()">Login</button>
+            <button id="logout" onclick="logout()" style="display:none;">Logout</button>
+        </div>
+        <div id="profile">
+            <h2>Perfil</h2>
+            <p id="profile-info"></p>
+        </div>
+    </div>
+
+    <script>
+        let auth0Client = null;
+
+        const config = {
+            domain: 'dev-zedqmqyag8i45b1a.us.auth0.com',
+            clientID: 'd3yLPkqDIKuVy9nWUWq0XYJvc9qOkiGs',
+
+        };
+
+        async function configureClient() {
+            auth0Client = await createAuth0Client({
+                domain: config.domain,
+                client_id: config.clientId
+            });
+        }
+
+        async function login() {
+            if (auth0Client) {
+                await auth0Client.loginWithRedirect({
+                    redirect_uri: window.location.href
+                });
+            }
+        }
+
+        async function logout() {
+            if (auth0Client) {
+                auth0Client.logout({
+                    returnTo: window.location.href
+                });
+            }
+        }
+
+        async function handleAuth() {
+            if (auth0Client) {
+                const query = window.location.search;
+                if (query.includes('code=') && query.includes('state=')) {
+                    await auth0Client.handleRedirectCallback();
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                }
+            }
+        }
+
+        async function checkAuth() {
+            if (auth0Client) {
+                const isAuthenticated = await auth0Client.isAuthenticated();
+
+                if (isAuthenticated) {
+                    document.getElementById('login').style.display = 'none';
+                    document.getElementById('logout').style.display = 'inline-block';
+
+                    const user = await auth0Client.getUser();
+                    document.getElementById('profile-info').innerHTML = `
+                        <p>${user.name}</p>
+                        <p>${user.email}</p>
+                        <img src="${user.picture}" alt="Profile Picture" />
+                    `;
+                    document.getElementById('profile').style.display = 'block';
+                } else {
+                    document.getElementById('login').style.display = 'inline-block';
+                    document.getElementById('logout').style.display = 'none';
+                    document.getElementById('profile').style.display = 'none';
+                }
+            }
+        }
+
+        window.onload = async () => {
+            await configureClient();
+            await handleAuth();
+            await checkAuth();
+        };
+    </script>
+</body>
+</html>
